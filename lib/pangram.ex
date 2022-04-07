@@ -1,13 +1,9 @@
 defmodule Pangram do
-  defmodule Helper do
-    def letters(string) do
-      string |> String.downcase() |> String.codepoints() |> MapSet.new()
-    end
+  def pangram?(sentence) do
+    MapSet.subset?(letters("abcdefghijklmnopqrstuvwxyz"), letters(sentence))
   end
 
-  @alphabet Helper.letters("abcdefghijklmnopqrstuvwxyz")
-
-  def pangram?(sentence) do
-    MapSet.subset?(@alphabet, Helper.letters(sentence))
+  defp letters(string) do
+    string |> String.downcase() |> String.codepoints() |> MapSet.new()
   end
 end
